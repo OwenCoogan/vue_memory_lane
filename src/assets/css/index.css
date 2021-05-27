@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.flex-1{
+    display:flex;
+}
+
+header,.content-center{
+    padding:10px;
+}
+.content-center .post-holder{
+    margin: 1Opx 20px;
+}
+
+.modal{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate ( -50% , -50% );
+    background-color:black;
+    z-index:999;
+    padding:40px;
+}
