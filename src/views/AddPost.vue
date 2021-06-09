@@ -8,24 +8,25 @@
       
 
       <p>
-        <label for="name">Nom</label>
+        <label for="title">Titre</label>
         <input
-          id="name"
-          v-model="name"
+          id="title"
+          v-model="title"
           type="text"
-          name="name"
+          name="title"
         >
       </p>
 
       <p>
         <label for="desc">Description</label>
         <input
-          id="desc"
-          v-model="desc"
-          type="text"
-          name="desc"
+          id="content"
+          v-model="content"
+          type="content"
+          name="content"
         >
       </p>
+
       <p>
         <input
           type="submit"
@@ -43,18 +44,24 @@ export default({
     
   },
   data() {
+    const position = JSON.parse(localStorage.getItem("coordinates"))
     return {
       form:{
-          name: null,
-          desc: null
+          title: null,
+          content: null,
+          gpsPositionLat: position.lat,
+          gpsPositionLong: position.lng
       } 
     }
   },
   methods:{
         submitForm(){
-            axios.post('http://localhost:6590/api/post/create', {
-                name: this.name,
-                description: this.desc,
+          const position = JSON.parse(localStorage.getItem("coordinates"))
+            axios.post('http://localhost:6590/v1/post/create', {
+                title: this.title,
+                content: this.content,
+                gpsPositionLat: position.lat,
+                gpsPositionLong: position.lng
               })
             
                  .then((res) => {
@@ -62,9 +69,7 @@ export default({
                  })
                  .catch((error) => {
                       console.log(error)
-                 }).finally(() => {
-                     //Perform action in always
-                 });
+                 })
         }
     
 
